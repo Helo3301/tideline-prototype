@@ -202,8 +202,7 @@
       <nav class="site-nav" aria-label="Primary">
         <ul>
           <li><a href="home.html">Home</a></li>
-          <li><a href="home.html#services">Services</a></li>
-          <li><a href="deep-tissue.html">Modalities</a></li>
+          <li><a href="modalities.html">Modalities</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="book.html" class="is-current">Book</a></li>
@@ -236,6 +235,12 @@
     <div class="two-col" style="grid-template-columns: 1.6fr 1fr;">
 
       <div class="col">
+
+        <!-- IN-STUDIO vs MOBILE explainer — appears above the booking widget -->
+        <p style="font-family: var(--display); font-style: italic; font-variation-settings: 'opsz' 60; color: var(--sage-deep); font-size: 1.05rem; margin: 0 0 var(--s-3); padding: 0 0 var(--s-2); border-bottom: 1px solid var(--copper);">
+          <span style="font-family: var(--body); font-size: var(--t-meta); letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper); display: block; margin-bottom: 4px;">In-studio · Mobile</span>
+          Studio sessions happen at 121 Main, Suite 210. Mobile sessions are available within 10 miles of the studio — enter your address below and the ZIP check confirms the fee before you ever reach checkout.
+        </p>
 
         <!-- VELO §6.1 — Service-area gate (only shown when mobile selected; rendered always here for prototype) -->
         <div class="velo-gate">
@@ -318,23 +323,24 @@
           </div>
 
           <div class="calendar">
-            <div class="month-grid">
+            <div class="month-grid" role="grid" aria-label="May 2026 booking calendar">
               <div class="dow">Su</div><div class="dow">Mo</div><div class="dow">Tu</div><div class="dow">We</div><div class="dow">Th</div><div class="dow">Fr</div><div class="dow">Sa</div>
-              <div class="day is-disabled">27</div><div class="day is-disabled">28</div><div class="day is-disabled">29</div><div class="day is-disabled">30</div><div class="day is-disabled">1</div><div class="day is-disabled">2</div><div class="day">3</div>
-              <div class="day is-disabled">4</div><div class="day is-disabled">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day is-selected">10</div>
-              <div class="day is-disabled">11</div><div class="day is-disabled">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div>
-              <div class="day is-disabled">18</div><div class="day is-disabled">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div>
-              <div class="day is-disabled">25</div><div class="day is-disabled">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div><div class="day">31</div>
+              <div class="day is-disabled" aria-disabled="true">26</div><div class="day is-disabled" aria-disabled="true">27</div><div class="day is-disabled" aria-disabled="true">28</div><div class="day is-disabled" aria-disabled="true">29</div><div class="day is-disabled" aria-disabled="true">30</div><div class="day is-disabled" aria-disabled="true">1</div><div class="day is-disabled" aria-disabled="true">2</div>
+              <div class="day is-disabled" aria-disabled="true">3</div><div class="day is-disabled" aria-disabled="true">4</div><div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day is-selected" aria-selected="true">9</div>
+              <div class="day is-disabled" aria-disabled="true">10</div><div class="day is-disabled" aria-disabled="true">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div>
+              <div class="day is-disabled" aria-disabled="true">17</div><div class="day is-disabled" aria-disabled="true">18</div><div class="day">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div>
+              <div class="day is-disabled" aria-disabled="true">24</div><div class="day is-disabled" aria-disabled="true">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+              <div class="day is-disabled" aria-disabled="true">31</div>
             </div>
             <div>
-              <p style="font-family: var(--display); font-style: italic; color: var(--sage-deep); margin: 0 0 var(--s-2);">Saturday, May 10 · 6 slots</p>
-              <div class="day-times">
-                <div class="t"><span class="label">morning</span><div class="time">09:00</div></div>
-                <div class="t is-selected"><span class="label">morning</span><div class="time">10:30</div></div>
-                <div class="t"><span class="label">midday</span><div class="time">12:00</div></div>
-                <div class="t"><span class="label">afternoon</span><div class="time">13:30</div></div>
-                <div class="t"><span class="label">afternoon</span><div class="time">15:00</div></div>
-                <div class="t"><span class="label">evening</span><div class="time">16:30</div></div>
+              <p style="font-family: var(--display); font-style: italic; color: var(--sage-deep); margin: 0 0 var(--s-2);">Saturday, May 9 · 6 slots</p>
+              <div class="day-times" role="list" aria-label="Available times Saturday May 9">
+                <div class="t" role="listitem" tabindex="0"><span class="label">morning</span><div class="time">09:00</div></div>
+                <div class="t is-selected" role="listitem" tabindex="0" aria-selected="true"><span class="label">morning</span><div class="time">10:30</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">midday</span><div class="time">12:00</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">afternoon</span><div class="time">13:30</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">afternoon</span><div class="time">15:00</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">evening</span><div class="time">16:30</div></div>
               </div>
             </div>
           </div>
@@ -344,7 +350,7 @@
             <div>
               <span class="velo-marker">Step 04 · Confirm &amp; deposit</span>
               <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--sage-shadow); margin: 4px 0 0;">
-                Sat, May 10 · 10:30
+                Sat, May 9 · 10:30
                 <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">90 min Deep Tissue · in-home (+$30) · $185 total · $55.50 deposit</em>
               </h3>
             </div>
@@ -398,16 +404,6 @@
 
       </div>
     </div>
-  </section>
-
-  <!-- HONEST SEAM CALLOUT (prototype-only, REMOVE before launch) -->
-  <section class="wrap section">
-    <aside style="background: var(--copper-wash); border: 1px solid var(--copper); padding: var(--s-3); display: grid; grid-template-columns: auto 1fr; gap: var(--s-3); align-items: start;">
-      <span class="eyebrow" style="white-space: nowrap;">⌗ Prototype note · remove before launch</span>
-      <p style="font-family: var(--display); font-style: italic; font-variation-settings: 'opsz' 60; color: var(--sage-deep); font-size: 1.05rem; line-height: 1.5; margin: 0;">
-        The booking widget area on this page is a static mock of the panel-customized Wix Bookings widget. In the production build, the *frame* (typographic hero, tide line, sidebar, Velo service-area gate, what-happens-next strip) is fully ours; the *grid internals* (calendar cells, day-time picker, checkout button) are rendered by Wix Bookings and styled via the Studio panel — fonts, colors, button labels, divider style, show/hide of subtitles and badges. The widget's checkout button becomes our copper CTA via panel. The calendar grid layout itself is not CSS-addressable; we accept Wix-native there and design around it. See <code>WIX_RECON.md §3</code> for the customization envelope.
-      </p>
-    </aside>
   </section>
 
   <footer class="site-footer">
