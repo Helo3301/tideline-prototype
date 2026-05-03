@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a Session — Riverbend Massage Therapy</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page-local: the Wix Bookings widget envelope.
+       The widget itself is rendered by Wix at runtime — what's customizable
+       in the panel: button colors, fonts, borders, dividers, show/hide of
+       subtitles/badges/availability. What's NOT addressable: the calendar
+       grid internals. So we frame it editorially. */
+    .booking-widget {
+      background: var(--bone);
+      border: 1px solid var(--copper);
+      padding: 0;
+      position: relative;
+    }
+    .booking-widget .seam {
+      position: absolute;
+      top: -10px;
+      left: var(--s-3);
+      background: var(--bone);
+      padding: 0 var(--s-2);
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .booking-widget .widget-mock-header {
+      padding: var(--s-3);
+      border-bottom: 1px solid var(--copper);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: var(--s-3);
+    }
+    .booking-widget .service-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--copper);
+      padding: 1px;
+    }
+    .booking-widget .svc {
+      background: var(--bone);
+      padding: var(--s-2);
+      text-align: center;
+      cursor: pointer;
+    }
+    .booking-widget .svc:hover { background: var(--copper-wash); }
+    .booking-widget .svc.is-selected { background: var(--copper); color: var(--bone); }
+    .booking-widget .svc .label {
+      font-family: var(--body);
+      font-size: var(--t-meta);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .booking-widget .svc.is-selected .label { color: var(--bone); }
+    .booking-widget .svc .name {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--charcoal);
+    }
+    .booking-widget .svc.is-selected .name { color: var(--bone); }
+    .booking-widget .calendar {
+      padding: var(--s-3);
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--s-3);
+    }
+    .booking-widget .month-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .booking-widget .month-grid .dow {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+      text-align: center;
+      padding: 6px 0;
+    }
+    .booking-widget .month-grid .day {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--charcoal);
+      text-align: center;
+      padding: 10px 0;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .booking-widget .month-grid .day:hover { border-color: var(--copper); }
+    .booking-widget .month-grid .day.is-selected { background: var(--copper); color: var(--bone); }
+    .booking-widget .month-grid .day.is-disabled { color: var(--river-stone); cursor: not-allowed; }
+    .booking-widget .day-times {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--copper);
+    }
+    .booking-widget .day-times .t {
+      background: var(--bone);
+      padding: var(--s-2);
+      text-align: center;
+      cursor: pointer;
+    }
+    .booking-widget .day-times .t:hover { background: var(--copper-wash); }
+    .booking-widget .day-times .t.is-selected { background: var(--copper); color: var(--bone); }
+    .booking-widget .day-times .t .label {
+      font-family: var(--body);
+      font-size: var(--t-meta);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .booking-widget .day-times .t.is-selected .label { color: var(--bone); }
+    .booking-widget .day-times .t .time {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--sage-shadow);
+    }
+    .booking-widget .day-times .t.is-selected .time { color: var(--bone); }
+
+    /* Velo-injected service-area gate */
+    .velo-gate {
+      background: var(--copper-wash);
+      border: 1px solid var(--copper);
+      padding: var(--s-3);
+      margin-bottom: var(--s-3);
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: var(--s-3);
+      align-items: end;
+    }
+    .velo-gate input {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      padding: 0.6rem 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--copper);
+      color: var(--charcoal);
+      outline: none;
+      width: 100%;
+    }
+    .velo-gate label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .velo-gate label > span {
+      font-family: var(--body);
+      font-size: var(--t-meta);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .velo-gate .gate-result {
+      font-family: var(--display);
+      font-style: italic;
+      font-variation-settings: 'opsz' 60;
+      color: var(--sage-deep);
+      font-size: 1.05rem;
+    }
+    .velo-gate .gate-result strong {
+      color: var(--copper);
+      font-weight: 400;
+    }
+    .velo-marker {
+      font-family: var(--body);
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    @media (max-width: 960px) {
+      .booking-widget .calendar { grid-template-columns: 1fr; }
+      .booking-widget .service-row { grid-template-columns: 1fr 1fr; }
+      .velo-gate { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ruler" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-name">RIVERBEND</span>
+        <span class="brand-cred">Massage Therapy · Springfield OR</span>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="home.html#services">Services</a></li>
+          <li><a href="deep-tissue.html">Modalities</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="book.html" class="is-current">Book</a></li>
+        </ul>
+      </nav>
+      <div class="meta">Tue–Sat · By appointment</div>
+    </div>
+  </header>
+
+  <!-- HERO: typographic, no photo -->
+  <section class="hero-type wrap">
+    <span class="eyebrow">§ 39 · Book</span>
+    <h1>
+      Pick a length.
+      <em>Pick a slot.</em>
+    </h1>
+    <p class="lede body-l">First-session bookings hold for owner pre-review on the conditions list — pregnancy, recent surgery, anticoagulants, active oncology. Everything else auto-confirms within a minute. Deposits are 30%; balance is taken at session end on the card you choose.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="tide" role="presentation">
+      <span class="tide-index">§ 39 · Book</span>
+      <span class="tide-clause">deposit holds the time, the time holds the room</span>
+      <span class="tide-pageref">Book / Riverbend</span>
+    </div>
+  </div>
+
+  <!-- 2-column: widget left, policy sidebar right -->
+  <section class="wrap section-tight">
+    <div class="two-col" style="grid-template-columns: 1.6fr 1fr;">
+
+      <div class="col">
+
+        <!-- VELO §6.1 — Service-area gate (only shown when mobile selected; rendered always here for prototype) -->
+        <div class="velo-gate">
+          <label>
+            <span>In-home address</span>
+            <input type="text" placeholder="121 Main St, Springfield OR" value="121 Main St, Springfield OR" />
+          </label>
+          <label>
+            <span>ZIP</span>
+            <input type="text" placeholder="97477" value="97477" />
+          </label>
+          <div>
+            <span class="velo-marker">Velo §6.1 · Service-area gate</span>
+            <p class="gate-result" style="margin: 4px 0 0;">Within radius — <strong>+$30 mobile fee</strong> applied.</p>
+          </div>
+        </div>
+
+        <!-- BOOKING WIDGET (Wix Bookings) — frame is ours, internals are panel-styled Wix -->
+        <div class="booking-widget">
+          <span class="seam">Wix Bookings · panel-customized to tokens</span>
+
+          <!-- Widget header is rendered via Wix; we hide its native title via panel toggle and place this above -->
+          <div class="widget-mock-header">
+            <div>
+              <span class="velo-marker">Step 01 · Choose service</span>
+              <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--sage-shadow); margin: 4px 0 0;">
+                Modality
+                <em style="display: inline-block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-left: 0.4rem;">— five hands-on practices.</em>
+              </h3>
+            </div>
+            <span style="font-family: var(--body); font-size: var(--t-meta); letter-spacing: 0.22em; text-transform: uppercase; color: var(--river-stone);">In-Studio · Mobile</span>
+          </div>
+
+          <div class="service-row">
+            <div class="svc is-selected"><span class="label">M·01</span><div class="name">Deep Tissue</div></div>
+            <div class="svc"><span class="label">M·02</span><div class="name">Prenatal</div></div>
+            <div class="svc"><span class="label">M·03</span><div class="name">Sports</div></div>
+            <div class="svc"><span class="label">M·04</span><div class="name">Lymphatic</div></div>
+            <div class="svc"><span class="label">M·05</span><div class="name">Integrated</div></div>
+          </div>
+
+          <!-- Step 2: length chips (this is panel-toggle "show duration" turned on) -->
+          <div class="widget-mock-header" style="border-top: 1px solid var(--copper);">
+            <div>
+              <span class="velo-marker">Step 02 · Length</span>
+              <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--sage-shadow); margin: 4px 0 0;">
+                How much time
+                <em style="display: inline-block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-left: 0.4rem;">— 90 is the first-session default.</em>
+              </h3>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--copper); padding: 1px;">
+            <div style="background: var(--bone); padding: var(--s-3); text-align: center;">
+              <div style="font-family: var(--body); font-size: var(--t-meta); letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper);">P·01</div>
+              <div style="font-family: var(--display); font-weight: 600; font-size: 1.7rem; color: var(--sage-shadow); margin-top: 4px;">60 min</div>
+              <div style="font-family: var(--display); font-style: italic; color: var(--sage-deep); font-size: 0.95rem;">$110</div>
+            </div>
+            <div style="background: var(--copper); color: var(--bone); padding: var(--s-3); text-align: center;">
+              <div style="font-family: var(--body); font-size: var(--t-meta); letter-spacing: 0.22em; text-transform: uppercase;">P·02 · selected</div>
+              <div style="font-family: var(--display); font-weight: 600; font-size: 1.9rem; margin-top: 4px;">90 min</div>
+              <div style="font-family: var(--display); font-style: italic; font-size: 0.95rem;">$155 + $30 mobile</div>
+            </div>
+            <div style="background: var(--bone); padding: var(--s-3); text-align: center;">
+              <div style="font-family: var(--body); font-size: var(--t-meta); letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper);">P·03</div>
+              <div style="font-family: var(--display); font-weight: 600; font-size: 1.7rem; color: var(--sage-shadow); margin-top: 4px;">120 min</div>
+              <div style="font-family: var(--display); font-style: italic; color: var(--sage-deep); font-size: 0.95rem;">$200</div>
+            </div>
+          </div>
+
+          <!-- Step 3: calendar + day times — Wix's native calendar layout, panel-styled -->
+          <div class="widget-mock-header" style="border-top: 1px solid var(--copper);">
+            <div>
+              <span class="velo-marker">Step 03 · Date &amp; time</span>
+              <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--sage-shadow); margin: 4px 0 0;">
+                When
+                <em style="display: inline-block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-left: 0.4rem;">— minimum 24h out, max 6 weeks.</em>
+              </h3>
+            </div>
+            <span style="font-family: var(--display); font-style: italic; color: var(--sage-deep); font-size: 1.1rem;">May 2026</span>
+          </div>
+
+          <div class="calendar">
+            <div class="month-grid">
+              <div class="dow">Su</div><div class="dow">Mo</div><div class="dow">Tu</div><div class="dow">We</div><div class="dow">Th</div><div class="dow">Fr</div><div class="dow">Sa</div>
+              <div class="day is-disabled">27</div><div class="day is-disabled">28</div><div class="day is-disabled">29</div><div class="day is-disabled">30</div><div class="day is-disabled">1</div><div class="day is-disabled">2</div><div class="day">3</div>
+              <div class="day is-disabled">4</div><div class="day is-disabled">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day is-selected">10</div>
+              <div class="day is-disabled">11</div><div class="day is-disabled">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div><div class="day">17</div>
+              <div class="day is-disabled">18</div><div class="day is-disabled">19</div><div class="day">20</div><div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div>
+              <div class="day is-disabled">25</div><div class="day is-disabled">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div><div class="day">31</div>
+            </div>
+            <div>
+              <p style="font-family: var(--display); font-style: italic; color: var(--sage-deep); margin: 0 0 var(--s-2);">Saturday, May 10 · 6 slots</p>
+              <div class="day-times">
+                <div class="t"><span class="label">morning</span><div class="time">09:00</div></div>
+                <div class="t is-selected"><span class="label">morning</span><div class="time">10:30</div></div>
+                <div class="t"><span class="label">midday</span><div class="time">12:00</div></div>
+                <div class="t"><span class="label">afternoon</span><div class="time">13:30</div></div>
+                <div class="t"><span class="label">afternoon</span><div class="time">15:00</div></div>
+                <div class="t"><span class="label">evening</span><div class="time">16:30</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: review summary + CTA — this is the Wix Bookings checkout button, restyled to copper via panel -->
+          <div style="padding: var(--s-3); border-top: 1px solid var(--copper); display: grid; grid-template-columns: 1fr auto; gap: var(--s-3); align-items: end; background: var(--copper-wash);">
+            <div>
+              <span class="velo-marker">Step 04 · Confirm &amp; deposit</span>
+              <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--sage-shadow); margin: 4px 0 0;">
+                Sat, May 10 · 10:30
+                <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">90 min Deep Tissue · in-home (+$30) · $185 total · $55.50 deposit</em>
+              </h3>
+            </div>
+            <a href="#confirm" class="btn">Hold the time <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col">
+
+        <!-- Cancellation policy reminder -->
+        <div style="border: 1px solid var(--copper); padding: var(--s-3); margin-bottom: var(--s-3);">
+          <span class="eyebrow">§ 40 · Before you book</span>
+          <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.4rem; color: var(--sage-shadow); margin: var(--s-2) 0;">
+            Cancellation policy.
+            <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">Linked here so you don't have to dig.</em>
+          </h3>
+          <ul style="font-family: var(--display); font-size: 1rem; line-height: 1.5;">
+            <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span>≥24h before</span><em style="color: var(--sage-deep);">free cancel</em></li>
+            <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span>&lt;24h before</span><em style="color: var(--copper);">50% fee</em></li>
+            <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span>No-show</span><em style="color: var(--copper);">100% fee</em></li>
+            <li style="display: flex; justify-content: space-between; padding: 4px 0;"><span>Late ≥15 min</span><em style="color: var(--sage-deep);">finishes on time</em></li>
+          </ul>
+        </div>
+
+        <!-- What to expect -->
+        <div style="border: 1px solid var(--copper); padding: var(--s-3); margin-bottom: var(--s-3);">
+          <span class="eyebrow">§ 41 · What happens next</span>
+          <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.4rem; color: var(--sage-shadow); margin: var(--s-2) 0;">
+            After you book.
+          </h3>
+          <ul style="font-family: var(--display); font-style: italic; font-variation-settings: 'opsz' 60; color: var(--sage-deep); font-size: 1rem; line-height: 1.5;">
+            <li style="padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">+0 min</span><br/>Confirmation email + .ics calendar attachment.</li>
+            <li style="padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">+intake</span><br/>If new client: intake link emailed; auto-confirms within 60 sec of completion.</li>
+            <li style="padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">−48 h</span><br/>Reminder email + intake check + parking note.</li>
+            <li style="padding: 4px 0;"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">−4 h</span><br/>SMS reminder (opt-out anytime, STOP keyword honored).</li>
+          </ul>
+        </div>
+
+        <!-- Returning client -->
+        <div style="background: var(--charcoal); color: var(--bone); padding: var(--s-3); border-left: 4px solid var(--copper);">
+          <span class="eyebrow" style="color: var(--copper);">Returning?</span>
+          <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.4rem; color: var(--bone); margin: var(--s-2) 0;">
+            Skip the gate.
+            <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">One-tap rebook in the member area.</em>
+          </h3>
+          <a href="rebook.html" class="cta" style="color: var(--copper); border-color: var(--copper);">Sign in to rebook →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HONEST SEAM CALLOUT (prototype-only, REMOVE before launch) -->
+  <section class="wrap section">
+    <aside style="background: var(--copper-wash); border: 1px solid var(--copper); padding: var(--s-3); display: grid; grid-template-columns: auto 1fr; gap: var(--s-3); align-items: start;">
+      <span class="eyebrow" style="white-space: nowrap;">⌗ Prototype note · remove before launch</span>
+      <p style="font-family: var(--display); font-style: italic; font-variation-settings: 'opsz' 60; color: var(--sage-deep); font-size: 1.05rem; line-height: 1.5; margin: 0;">
+        The booking widget area on this page is a static mock of the panel-customized Wix Bookings widget. In the production build, the *frame* (typographic hero, tide line, sidebar, Velo service-area gate, what-happens-next strip) is fully ours; the *grid internals* (calendar cells, day-time picker, checkout button) are rendered by Wix Bookings and styled via the Studio panel — fonts, colors, button labels, divider style, show/hide of subtitles and badges. The widget's checkout button becomes our copper CTA via panel. The calendar grid layout itself is not CSS-addressable; we accept Wix-native there and design around it. See <code>WIX_RECON.md §3</code> for the customization envelope.
+      </p>
+    </aside>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="editorial">
+        <h3>Riverbend<em>Massage Therapy</em></h3>
+        <p style="color: rgba(244,237,226,0.7); max-width: 36ch;">Bodywork that meets you where you are. Single-therapist studio in downtown Springfield, Oregon.</p>
+        <div class="stamp">© 2026 Riverbend Massage Therapy LLC · OR LMT #00000XX</div>
+      </div>
+      <div>
+        <span class="label">Visit</span>
+        <ul>
+          <li>121 Main Street, Suite 210</li>
+          <li>Springfield, OR 97477</li>
+          <li>(541) 555-2172</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Practice</span>
+        <ul>
+          <li><a href="pricing.html">Pricing &amp; Packages</a></li>
+          <li><a href="contact.html">Contact &amp; Access</a></li>
+          <li><a href="about.html">About Lena</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Riverbend Prototype — Pages</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--copper);
+      border: 1px solid var(--copper);
+      margin-top: var(--s-3);
+    }
+    .index-tile {
+      background: var(--bone);
+      padding: var(--s-3);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: background 200ms var(--ease-out);
+    }
+    .index-tile:hover { background: var(--copper-wash); }
+    .index-tile .ix {
+      font-family: var(--body);
+      font-size: var(--t-meta);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--copper);
+    }
+    .index-tile h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--sage-shadow);
+    }
+    .index-tile h3 em {
+      display: block;
+      color: var(--copper);
+      font-style: italic;
+      font-size: 0.7em;
+      margin-top: 0.2em;
+    }
+    .index-tile p {
+      font-family: var(--display);
+      font-style: italic;
+      color: var(--sage-deep);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="ruler" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-name">RIVERBEND</span>
+        <span class="brand-cred">Prototype · 2026-05-02</span>
+      </div>
+      <div></div>
+      <div class="meta">10 pages · port 8002</div>
+    </div>
+  </header>
+
+  <section class="hero-type wrap">
+    <span class="eyebrow">⌗ Prototype index</span>
+    <h1>
+      Ten pages.
+      <em>Three heroes. One signature.</em>
+    </h1>
+    <p class="lede body-l">Editorial-bodywork prototype for a fictional single-LMT Wix Studio + Velo build. Critique-then-redesign portfolio piece — the original AI-generated mockups are linked below as reference. Read <a href="docs/WIX_RECON.md" style="color: var(--copper); border-bottom: 1px solid var(--copper);">WIX_RECON.md</a> for keep/adapt/drop verdicts, then <a href="docs/BUILD_PLAN.md" style="color: var(--copper); border-bottom: 1px solid var(--copper);">BUILD_PLAN.md</a> for what changes before WP-1.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="tide" role="presentation">
+      <span class="tide-index">⌗ Prototype</span>
+      <span class="tide-clause">the room is built before the doors are open</span>
+      <span class="tide-pageref">Index / Riverbend</span>
+    </div>
+  </div>
+
+  <section class="wrap section">
+    <h2 style="font-size: var(--t-l); margin-bottom: var(--s-2);">Public pages <em style="color:var(--copper); font-style:italic; font-size: 0.7em;">— 8 of 8</em></h2>
+    <div class="index-grid">
+      <a class="index-tile" href="home.html"><span class="ix">P·01</span><h3>Home<em>full-bleed photo + overlapping panel</em></h3><p>Italic-clause hero, modalities bento, about teaser, closing band.</p></a>
+      <a class="index-tile" href="pricing.html"><span class="ix">P·02</span><h3>Pricing<em>typographic hero, no photo</em></h3><p>Bento with 90 dominant, packages as table, membership band, FAQ list.</p></a>
+      <a class="index-tile" href="deep-tissue.html"><span class="ix">P·03</span><h3>Deep Tissue<em>image-bleed-right</em></h3><p>H1 bleeds past column, price rail, helps grid, marginalia paragraph.</p></a>
+      <a class="index-tile" href="prenatal.html"><span class="ix">P·04</span><h3>Prenatal<em>image-bleed-left, softer palette</em></h3><p>Modality template flexed for opposite-mood content.</p></a>
+      <a class="index-tile" href="about.html"><span class="ix">P·05</span><h3>About<em>portrait + bio + studio strip</em></h3><p>Marginalia paragraphs, pull-quote, credentials list with rules.</p></a>
+      <a class="index-tile" href="book.html"><span class="ix">P·06</span><h3>Book<em>Wix Bookings envelope</em></h3><p>Editorial frame, Velo gate, panel-styled widget mock, policy sidebar.</p></a>
+      <a class="index-tile" href="contact.html"><span class="ix">P·07</span><h3>Contact<em>form + access + 12 FAQ</em></h3><p>Underline-only form fields, ADA list, copper-rule FAQ.</p></a>
+      <a class="index-tile" href="gift-cards.html"><span class="ix">P·08</span><h3>Gift Cards<em>amount bento + delivery list</em></h3><p>Editorial card preview, three delivery options as list, FAQ.</p></a>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2 style="font-size: var(--t-l); margin-bottom: var(--s-2);">Member area <em style="color:var(--copper); font-style:italic; font-size: 0.7em;">— 2 of 4 (intake + billing patterns derive from these)</em></h2>
+    <div class="index-grid">
+      <a class="index-tile" href="dashboard.html"><span class="ix">M·01</span><h3>Dashboard<em>signed-in state</em></h3><p>Member bar, sub-nav, greeting, dashboard bento with appointment + balance + session note.</p></a>
+      <a class="index-tile" href="rebook.html"><span class="ix">M·02</span><h3>Rebook<em>one-tap with pre-fill</em></h3><p>Modality + length pickers, slot grid, summary sidebar with package balance applied.</p></a>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2 style="font-size: var(--t-l); margin-bottom: var(--s-2);">Before <em style="color:var(--copper); font-style:italic; font-size: 0.7em;">— the AI-generated mockups this redesign critiques</em></h2>
+    <p style="font-family: var(--display); font-style: italic; font-variation-settings: 'opsz' 60; color: var(--sage-deep); font-size: 1.1rem; max-width: 70ch; margin-bottom: var(--s-3);">
+      Ten ChatGPT mockups generated from the original SPEC.md. Competent and on-brief, but failed the design.md test — five identical service cards, three identical pricing tiers, four identical gift-card tiles, six identical FAQ tiles, no signature element, copper at ~2% coverage. The redesign above is the answer.
+    </p>
+    <div class="index-grid">
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (1).png"><span class="ix">AI·01</span><h3>Home<em>5 identical service cards</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (2).png"><span class="ix">AI·02</span><h3>Services<em>"How to choose" buried at bottom</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (3).png"><span class="ix">AI·03</span><h3>Deep Tissue<em>strongest of the AI set</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (4).png"><span class="ix">AI·04</span><h3>Book<em>info-dense, hierarchy muddled</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (5).png"><span class="ix">AI·05</span><h3>Pricing<em>3 + 3 + 3 + 6 identical tiles</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (6).png"><span class="ix">AI·06</span><h3>About<em>portrait + bio + 4-tile bottom</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (7).png"><span class="ix">AI·07</span><h3>Gift Cards<em>4 identical amount tiles</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (8).png"><span class="ix">AI·08</span><h3>Contact<em>form + 6 FAQ tiles</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (9).png"><span class="ix">AI·09</span><h3>Dashboard<em>card-grid bottom row</em></h3></a>
+      <a class="index-tile" href="docs/ai-mockups/ChatGPT Image May 2, 2026, 07_57_50 PM (10).png"><span class="ix">AI·10</span><h3>Rebook<em>"Your calm is waiting" italic worked</em></h3></a>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2 style="font-size: var(--t-l); margin-bottom: var(--s-2);">Documents <em style="color:var(--copper); font-style:italic; font-size: 0.7em;">— spec, recon, build plan</em></h2>
+    <div class="index-grid">
+      <a class="index-tile" href="docs/SPEC.md"><span class="ix">D·01</span><h3>SPEC.md<em>v0.1.0 — original site spec</em></h3><p>14 sections: business identity, site arch, business rules, Wix stack, Velo modules, automations, design, SEO, build sequence, open questions.</p></a>
+      <a class="index-tile" href="docs/WIX_RECON.md"><span class="ix">D·02</span><h3>WIX_RECON.md<em>1,488 words</em></h3><p>Wix Studio + Velo capability research. CSS surface area, 11-row pattern verdicts, app envelopes, Velo capability check, open unknowns.</p></a>
+      <a class="index-tile" href="docs/BUILD_PLAN.md"><span class="ix">D·03</span><h3>BUILD_PLAN.md<em>prototype → Wix translation</em></h3><p>Changes to make before WP-1, refined WP execution order with new de-risking spikes, Velo build order, 80–120 hr estimate.</p></a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="editorial">
+        <h3>Riverbend<em>Prototype</em></h3>
+        <p style="color: rgba(244,237,226,0.7); max-width: 36ch;">Static HTML/CSS proof of the editorial-bodywork direction. Maps to Wix Studio + Velo per docs/WIX_RECON.md and docs/BUILD_PLAN.md.</p>
+        <div class="stamp">© 2026 Hestia's Creations · Portfolio piece · Fictional client</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Riverbend Members</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="ruler" aria-hidden="true"></div>
+
+  <!-- Member status bar -->
+  <div class="member-bar">
+    <div class="wrap">
+      <span class="who">SIGNED IN · Sarah Brennan · Member since 2024</span>
+      <span><a href="#account">Account</a> &nbsp;·&nbsp; <a href="#signout">Sign out</a></span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-name">RIVERBEND</span>
+        <span class="brand-cred">Massage Therapy · Members area</span>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="home.html#services">Services</a></li>
+          <li><a href="deep-tissue.html">Modalities</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="book.html">Book</a></li>
+        </ul>
+      </nav>
+      <div class="meta">Tue–Sat · By appointment</div>
+    </div>
+  </header>
+
+  <!-- Member sub-nav -->
+  <div class="wrap">
+    <nav class="member-nav" aria-label="Member">
+      <a href="dashboard.html" class="is-current">Dashboard</a>
+      <a href="rebook.html">Rebook</a>
+      <a href="#intake">Intake</a>
+      <a href="#billing">Billing</a>
+      <a href="#history">History</a>
+    </nav>
+  </div>
+
+  <!-- Greeting -->
+  <section class="wrap">
+    <div class="dash-greet">
+      <h1>
+        Welcome back, Sarah.
+        <em>Your calm is waiting.</em>
+      </h1>
+      <div class="meta">
+        Last visit · 26 days ago<br/>
+        <span style="color: var(--sage-deep); font-style: italic; text-transform: none; letter-spacing: 0; font-family: var(--display); font-size: 1rem;">— rebook nudge active</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIDE LINE -->
+  <div class="wrap">
+    <div class="tide" role="presentation">
+      <span class="tide-index">§ 34 · Members</span>
+      <span class="tide-clause">the work is yours, kept</span>
+      <span class="tide-pageref">Dashboard / Riverbend</span>
+    </div>
+  </div>
+
+  <!-- DASHBOARD BENTO -->
+  <section class="wrap">
+    <div class="dash-bento">
+
+      <!-- Feature: next appointment -->
+      <div class="dash-tile feature">
+        <span class="ix">D·01 · Next appointment</span>
+        <h3>
+          Saturday, May 17
+          <em>10:00 — Deep Tissue, 90 min</em>
+        </h3>
+        <div class="big">17<span style="font-size: 0.4em; color: var(--copper); font-style: italic; font-weight: 400; margin-left: 0.4rem;">May</span></div>
+        <p class="pull">Studio session · 121 Main · Suite 210. Confirmation will arrive 48h before with intake check and parking note.</p>
+        <div style="display: flex; gap: var(--s-2); flex-wrap: wrap; margin-top: auto;">
+          <a href="#manage" class="btn">Manage <span class="arrow">→</span></a>
+          <a href="rebook.html" class="btn btn-ghost">Add another</a>
+        </div>
+      </div>
+
+      <!-- Package balance -->
+      <div class="dash-tile">
+        <span class="ix">D·02 · Package balance</span>
+        <h3>Deep Restoration<em>5-pack, expires Aug 12</em></h3>
+        <div class="big">2<span style="font-size: 0.4em; color: var(--copper); font-style: italic; font-weight: 400; margin-left: 0.4rem;">/ 5 left</span></div>
+        <a href="rebook.html" class="cta">Use balance to rebook →</a>
+      </div>
+
+      <!-- Recent session note -->
+      <div class="dash-tile note">
+        <span class="ix">D·03 · Last session note</span>
+        <p class="pull">Worked the right trapezius and rhomboids; cervical mobility improved end-of-session. Watch desk posture this week — homework was the doorway pec stretch, three times daily.</p>
+        <span style="font-family: var(--body); font-size: var(--t-meta); letter-spacing: 0.18em; text-transform: uppercase; color: var(--copper); margin-top: auto;">Apr 21 · Lena</span>
+      </div>
+
+      <!-- Billing summary -->
+      <div class="dash-tile">
+        <span class="ix">D·04 · Billing</span>
+        <h3>Card on file<em>Visa ending 4421</em></h3>
+        <p class="pull">Last charge: $46.50 · deposit · Apr 21<br/>No outstanding balance.</p>
+        <a href="#billing" class="cta">Receipts &amp; methods →</a>
+      </div>
+
+      <!-- Intake status -->
+      <div class="dash-tile">
+        <span class="ix">D·05 · Intake</span>
+        <h3>Up to date<em>renews Aug 12 · 102 days</em></h3>
+        <p class="pull">Re-attestation reminder will arrive thirty days before renewal. Update sooner if anything has changed.</p>
+        <a href="#intake" class="cta">View &amp; update →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SHORTCUTS — list with rules, NOT 4 identical tiles -->
+  <section class="wrap section">
+    <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: var(--s-3); margin-bottom: var(--s-3);">
+      <h2 style="font-size: var(--t-l);">
+        Shortcuts.
+        <em style="display:block;">Things you do most.</em>
+      </h2>
+      <span class="eyebrow" style="text-align:right;">§ 35 · Quick</span>
+    </div>
+    <ul class="addons">
+      <li><span class="ix">S·01</span><span class="desc">Rebook last modality (Deep Tissue, 90) for the same Saturday slot.</span><a href="rebook.html" class="price-cell" style="font-size: 0.95rem; color: var(--copper); font-style: italic; border-bottom: 1px solid var(--copper);">one-tap →</a></li>
+      <li><span class="ix">S·02</span><span class="desc">Buy a gift card for someone — same checkout, member discount applied if you have one.</span><a href="gift-cards.html" class="price-cell" style="font-size: 0.95rem; color: var(--copper); font-style: italic; border-bottom: 1px solid var(--copper);">choose →</a></li>
+      <li><span class="ix">S·03</span><span class="desc">Renew the Deep Restoration 5-pack — saves 10% off single-session pricing.</span><a href="pricing.html" class="price-cell" style="font-size: 0.95rem; color: var(--copper); font-style: italic; border-bottom: 1px solid var(--copper);">renew →</a></li>
+      <li><span class="ix">S·04</span><span class="desc">Update card on file or add an HSA card for superbill reimbursement.</span><a href="#billing" class="price-cell" style="font-size: 0.95rem; color: var(--copper); font-style: italic; border-bottom: 1px solid var(--copper);">manage →</a></li>
+    </ul>
+  </section>
+
+  <!-- CLOSING BAND -->
+  <section class="closing">
+    <div class="wrap">
+      <h2>
+        See you Saturday.
+        <em>Bring the right shoulder.</em>
+      </h2>
+      <a href="rebook.html" class="btn">Add another <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="editorial">
+        <h3>Riverbend<em>Massage Therapy</em></h3>
+        <p style="color: rgba(244,237,226,0.7); max-width: 36ch;">Bodywork that meets you where you are. Single-therapist studio in downtown Springfield, Oregon.</p>
+        <div class="stamp">© 2026 Riverbend Massage Therapy LLC · OR LMT #00000XX</div>
+      </div>
+      <div>
+        <span class="label">Visit</span>
+        <ul>
+          <li>121 Main Street, Suite 210</li>
+          <li>Springfield, OR 97477</li>
+          <li>(541) 555-2172</li>
+        </ul>
+      </div>
+      <div>
+        <span class="label">Members</span>
+        <ul>
+          <li><a href="rebook.html">Rebook</a></li>
+          <li><a href="#intake">Intake &amp; consent</a></li>
+          <li><a href="#billing">Billing &amp; receipts</a></li>
+          <li><a href="#history">Session history</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

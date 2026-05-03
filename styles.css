@@ -1,0 +1,1368 @@
+/* =========================================================
+   RIVERBEND — REDESIGN PROTOTYPE
+   Direction: editorial bodywork. Sage-on-bone with copper as
+   load-bearing structural ink. Fraunces italic as a system.
+   The tide line is the signature element on every page.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600&display=swap');
+
+/* ---------- TOKENS ---------- */
+:root {
+  /* color */
+  --bone:        #f4ede2;
+  --bone-grain:  #ece4d6;
+  --bone-deep:   #e2d6c1;
+  --sage:        #7c8e7a;
+  --sage-deep:   #4f6650;
+  --sage-shadow: #2f3d31;
+  --river-stone: #aaa094;
+  --copper:      #a05a2c;
+  --copper-deep: #7d4421;
+  --copper-tint: rgba(160, 90, 44, 0.10);
+  --copper-wash: rgba(160, 90, 44, 0.04);
+  --charcoal:    #2a2f33;
+  --charcoal-soft: #4a4f53;
+
+  /* type */
+  --display: 'Fraunces', Georgia, serif;
+  --body:    'Inter', system-ui, sans-serif;
+
+  /* fluid type scale */
+  --t-xxl: clamp(3.6rem, 9vw, 8rem);     /* hero display */
+  --t-xl:  clamp(2.8rem, 5.6vw, 4.6rem); /* page H1 */
+  --t-l:   clamp(2rem, 3.6vw, 3rem);     /* section H2 */
+  --t-m:   clamp(1.4rem, 1.8vw, 1.85rem);/* H3 */
+  --t-s:   1.18rem;                       /* body large */
+  --t-b:   1.0625rem;                     /* body */
+  --t-meta:0.78rem;                       /* widest-tracked caps */
+
+  /* spacing */
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 2rem;
+  --s-4: 4rem;
+  --s-5: 8rem;
+  --s-6: 12rem;
+
+  /* layout */
+  --content: 1240px;
+  --editorial: 760px;
+
+  /* rhythm */
+  --rule: 1px;
+  --rule-thick: 2px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:  cubic-bezier(0.5, 0, 0.75, 0);
+}
+
+/* ---------- RESET ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; border: 0; background: none; cursor: pointer; }
+ul { padding: 0; margin: 0; list-style: none; }
+
+/* ---------- BASE ---------- */
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  font-size: var(--t-b);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--charcoal);
+  background: var(--bone);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* paper grain ground — applied to body so it persists across sections */
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(124, 142, 122, 0.10), transparent 55%),
+    radial-gradient(ellipse at 92% 92%, rgba(160, 90, 44, 0.06), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.18 0 0 0 0 0.20 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-attachment: fixed, fixed, fixed;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+.display, h1, h2, h3, h4, h5 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  color: var(--sage-shadow);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+em, .italic, .clause {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+}
+.clause { font-size: 1.05em; }
+
+.eyebrow {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.editorial-lede {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  font-weight: 400;
+  font-size: var(--t-m);
+  line-height: 1.32;
+  color: var(--sage-deep);
+  max-width: var(--editorial);
+}
+
+p { margin: 0 0 var(--s-2) 0; }
+.body-l { font-size: var(--t-s); line-height: 1.6; }
+
+/* ---------- THE SIGNATURE: TIDE LINE ----------
+   Bisects every page at the same vertical position.
+   Copper hairline + italic clause + section index.
+   This is the McKenzie-emergency-band equivalent. */
+.tide {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-3);
+  margin: var(--s-4) 0;
+  position: relative;
+}
+.tide::before, .tide::after {
+  content: "";
+  height: var(--rule);
+  background: var(--copper);
+  align-self: center;
+}
+.tide-clause {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  color: var(--copper);
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.005em;
+  position: relative;
+}
+.tide-clause::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.85em;
+  width: 8px; height: 8px;
+  background: var(--copper);
+  transform: translateX(-50%) rotate(45deg);
+}
+.tide-index {
+  position: absolute;
+  left: 0;
+  bottom: -1.6rem;
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.tide-pageref {
+  position: absolute;
+  right: 0;
+  bottom: -1.6rem;
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--river-stone);
+}
+
+/* ---------- LAYOUT ---------- */
+.wrap {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 var(--s-3);
+}
+.wrap-narrow {
+  max-width: var(--editorial);
+  margin: 0 auto;
+  padding: 0 var(--s-3);
+}
+.section { padding: var(--s-5) 0; }
+.section-tight { padding: var(--s-4) 0; }
+
+/* The vertical copper ruler — left-margin index that runs site-wide */
+.ruler {
+  position: fixed;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--copper);
+  opacity: 0.35;
+  z-index: 5;
+  pointer-events: none;
+}
+.ruler::before {
+  content: "RIVERBEND · LMT 00000XX";
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: rotate(-90deg) translateX(50%);
+  transform-origin: left center;
+  font-family: var(--body);
+  font-size: 0.68rem;
+  letter-spacing: 0.42em;
+  color: var(--copper);
+  white-space: nowrap;
+}
+
+/* ---------- HEADER / NAV ----------
+   Not logo-left + links-center + CTA-right.
+   Logo + license-line top, nav as italic links inline below a copper hairline. */
+.site-header {
+  padding: var(--s-3) 0 0;
+  position: relative;
+  z-index: 10;
+}
+.site-header .wrap {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: var(--s-3);
+  padding-bottom: var(--s-2);
+  border-bottom: var(--rule) solid var(--copper);
+}
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.brand-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-variation-settings: "opsz" 144;
+  font-size: 1.6rem;
+  color: var(--sage-shadow);
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+.brand-cred {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.site-nav ul {
+  display: flex;
+  gap: var(--s-3);
+  justify-content: flex-end;
+  align-items: baseline;
+}
+.site-nav a {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  font-size: 1.18rem;
+  color: var(--charcoal);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 200ms var(--ease-out);
+}
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: -3px;
+  height: 1px;
+  background: var(--copper);
+  transition: right 280ms var(--ease-out);
+}
+.site-nav a:hover, .site-nav a.is-current { color: var(--copper); }
+.site-nav a:hover::after, .site-nav a.is-current::after { right: 0; }
+.site-header .meta {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--river-stone);
+  text-align: right;
+  align-self: end;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.95rem 1.6rem;
+  font-family: var(--body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--copper);
+  color: var(--bone);
+  border: 1px solid var(--copper);
+  transition: background 200ms var(--ease-out), color 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+.btn:hover { background: var(--copper-deep); border-color: var(--copper-deep); transform: translateY(-1px); }
+.btn .arrow { transition: transform 240ms var(--ease-out); }
+.btn:hover .arrow { transform: translateX(4px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--charcoal);
+  border-color: var(--charcoal);
+}
+.btn-ghost:hover { background: var(--charcoal); color: var(--bone); }
+
+/* ---------- HOME HERO — full-bleed photo with overlapping editorial panel ---------- */
+.hero-home {
+  position: relative;
+  margin-top: var(--s-3);
+  height: clamp(560px, 78vh, 820px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-home .photo {
+  position: absolute;
+  inset: 0;
+  /* REPLACE: real treatment-room photo, warm single-source light, sage shadows.
+     Placeholder is a layered gradient that approximates the photographic palette. */
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(244, 237, 226, 0.55), transparent 55%),
+    radial-gradient(ellipse at 25% 80%, rgba(47, 61, 49, 0.85), transparent 60%),
+    linear-gradient(135deg, var(--sage-shadow) 0%, var(--sage-deep) 35%, var(--bone-deep) 100%);
+}
+.hero-home .photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.85 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  mix-blend-mode: overlay;
+}
+.hero-home .panel {
+  position: absolute;
+  left: clamp(2rem, 6vw, 7rem);
+  bottom: -2rem;
+  max-width: 640px;
+  background: var(--bone);
+  padding: var(--s-4) var(--s-4) var(--s-3);
+  border-top: var(--rule-thick) solid var(--copper);
+  box-shadow: 0 20px 60px -28px rgba(42, 47, 51, 0.4);
+  animation: rise 600ms var(--ease-out) both;
+}
+.hero-home .panel .eyebrow { display: block; margin-bottom: var(--s-2); }
+.hero-home h1 {
+  font-size: var(--t-xxl);
+  font-variation-settings: "opsz" 144;
+  font-weight: 600;
+  margin: 0 0 var(--s-2);
+}
+.hero-home h1 em {
+  display: block;
+  font-size: 0.78em;
+  margin-top: 0.05em;
+  color: var(--copper);
+}
+.hero-home .lede {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin: var(--s-2) 0 var(--s-3);
+  max-width: 460px;
+}
+.hero-home .actions { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- HOME — MODALITIES BENTO ---------- */
+.modalities {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1px;
+  background: var(--copper);
+  border: 1px solid var(--copper);
+  margin-top: var(--s-4);
+}
+.mod {
+  background: var(--bone);
+  padding: var(--s-3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  transition: background 240ms var(--ease-out);
+}
+.mod:hover { background: var(--bone-grain); }
+.mod-feature {
+  grid-row: 1 / span 2;
+  min-height: 460px;
+  background:
+    linear-gradient(180deg, rgba(244,237,226,0) 40%, rgba(244,237,226,0.96) 100%),
+    radial-gradient(ellipse at 60% 30%, var(--bone-deep), var(--sage-deep));
+  color: var(--charcoal);
+  padding: var(--s-4) var(--s-3) var(--s-3);
+}
+.mod-feature .mod-name { font-size: 3rem; }
+.mod .ix {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.32em;
+  color: var(--copper);
+}
+.mod .mod-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  font-size: 1.7rem;
+  line-height: 1;
+  margin-top: var(--s-2);
+}
+.mod .mod-name em { display: block; font-size: 0.6em; margin-top: 0.2em; color: var(--copper); }
+.mod .mod-tag {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  margin-top: var(--s-2);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.mod .mod-link {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-top: var(--s-3);
+  border-bottom: 1px solid var(--copper);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+/* ---------- TRUST RIDE — single editorial line, NOT a row of badge cards ---------- */
+.trust-ride {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--copper);
+  border-bottom: 1px solid var(--copper);
+  flex-wrap: wrap;
+  font-family: var(--body);
+  font-size: 0.86rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--charcoal-soft);
+}
+.trust-ride span { white-space: nowrap; }
+.trust-ride .dot {
+  width: 6px; height: 6px;
+  background: var(--copper);
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 var(--s-2);
+}
+
+/* ---------- ABOUT TEASER (HOME) ---------- */
+.about-teaser {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: var(--s-4);
+  align-items: stretch;
+}
+.about-teaser .portrait {
+  /* REPLACE: portrait of Lena, soft light, looking off-camera; treated to bone+sage palette */
+  background:
+    linear-gradient(160deg, var(--sage-deep), var(--bone-deep));
+  min-height: 480px;
+  position: relative;
+}
+.about-teaser .portrait::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.85 0 0 0 0.16 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  mix-blend-mode: overlay;
+}
+.about-teaser .body {
+  border-left: 1px solid var(--copper);
+  padding-left: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-teaser h2 {
+  font-size: var(--t-l);
+  font-weight: 600;
+  margin-bottom: var(--s-3);
+}
+.about-teaser h2 em { display: block; color: var(--copper); }
+.pull-quote {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  font-size: 1.6rem;
+  line-height: 1.35;
+  color: var(--sage-deep);
+  border-left: 2px solid var(--copper);
+  padding-left: var(--s-3);
+  margin: var(--s-3) 0;
+}
+
+/* ---------- CLOSING BAND ---------- */
+.closing {
+  background: var(--copper-tint);
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--copper);
+  border-bottom: 1px solid var(--copper);
+  position: relative;
+}
+.closing .wrap {
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  gap: var(--s-4);
+  align-items: end;
+}
+.closing h2 {
+  font-size: var(--t-xl);
+  line-height: 1.0;
+  font-weight: 600;
+}
+.closing h2 em { display: block; color: var(--copper); }
+
+/* ---------- FOOTER — asymmetric, NOT 4-column equal ---------- */
+.site-footer {
+  padding: var(--s-4) 0 var(--s-3);
+  background: var(--charcoal);
+  color: var(--bone);
+}
+.site-footer .wrap {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: var(--s-4);
+  border-top: 1px solid var(--copper);
+  padding-top: var(--s-4);
+}
+.site-footer .editorial {
+  border-right: 1px solid var(--copper);
+  padding-right: var(--s-3);
+}
+.site-footer h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--bone);
+  margin-bottom: var(--s-2);
+}
+.site-footer h3 em { display: block; color: var(--copper); font-size: 0.62em; margin-top: 0.4em; }
+.site-footer .label {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: var(--s-1);
+  display: block;
+}
+.site-footer ul li { margin-bottom: 0.5rem; font-size: 0.95rem; color: rgba(244, 237, 226, 0.78); }
+.site-footer .stamp {
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid rgba(160, 90, 44, 0.4);
+  font-family: var(--body);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--river-stone);
+}
+
+/* ===========================================================
+   PRICING PAGE
+   =========================================================== */
+
+/* Typographic hero — no photo. The page IS its statement. */
+.hero-type {
+  padding: var(--s-5) 0 var(--s-4);
+  position: relative;
+}
+.hero-type .eyebrow { display: block; margin-bottom: var(--s-3); }
+.hero-type h1 {
+  font-size: var(--t-xxl);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  line-height: 0.96;
+  max-width: 11ch;
+}
+.hero-type h1 em {
+  display: block;
+  color: var(--copper);
+  font-size: 0.84em;
+}
+.hero-type .lede {
+  margin-top: var(--s-3);
+  max-width: 56ch;
+}
+
+/* Bento pricing — 90 MIN dominant, 60 + 120 satellites */
+.price-bento {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  background: var(--copper);
+  border: 1px solid var(--copper);
+  margin-top: var(--s-4);
+}
+.price-tile {
+  background: var(--bone);
+  padding: var(--s-3) var(--s-3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 200px;
+}
+.price-tile.recommended {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  background: var(--bone);
+  padding: var(--s-4) var(--s-4) var(--s-3);
+  min-height: 440px;
+  background:
+    linear-gradient(180deg, var(--bone) 0%, var(--bone-grain) 100%);
+}
+.price-tile.t-60 { grid-column: 1; grid-row: 1; }
+.price-tile.t-120 { grid-column: 3; grid-row: 2; }
+.price-tile.flag { grid-column: 1; grid-row: 2; background: var(--copper-wash); }
+.price-tile.note { grid-column: 3; grid-row: 1; background: var(--copper-wash); }
+
+.price-tile .ix {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.32em;
+  color: var(--copper);
+  text-transform: uppercase;
+}
+.price-tile .duration {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1.1rem;
+  margin-top: 4px;
+}
+.price-tile .price {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--sage-shadow);
+  margin: var(--s-2) 0;
+}
+.price-tile.recommended .price { font-size: 6rem; }
+.price-tile.recommended .duration { font-size: 1.45rem; }
+.price-tile.recommended .recommend-stamp {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--copper);
+  font-size: 1.05rem;
+}
+.price-tile.recommended .recommend-stamp::before {
+  content: "";
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--copper);
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.price-tile .desc {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  line-height: 1.4;
+}
+.price-tile.flag .flag-text {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--copper);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+.price-tile .cta {
+  margin-top: var(--s-3);
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border-bottom: 1px solid var(--copper);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+/* Packages — editorial table, no cards */
+.packages {
+  margin-top: var(--s-4);
+}
+.pkg-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.5fr 1fr 1fr auto;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid var(--copper);
+}
+.pkg-row:first-child { border-top: 1px solid var(--copper); }
+.pkg-row .name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  font-size: 1.7rem;
+  color: var(--sage-shadow);
+}
+.pkg-row .name em { display: block; color: var(--copper); font-size: 0.65em; font-weight: 400; }
+.pkg-row .save {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--copper);
+}
+.pkg-row .desc {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.pkg-row .price-cell {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--charcoal);
+}
+.pkg-row .pick {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border-bottom: 1px solid var(--copper);
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+/* Membership callout */
+.membership {
+  margin-top: var(--s-4);
+  padding: var(--s-4);
+  background: var(--charcoal);
+  color: var(--bone);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-4);
+  align-items: end;
+  border-left: 4px solid var(--copper);
+}
+.membership .eyebrow { color: var(--copper); display: block; margin-bottom: var(--s-2); }
+.membership h3 {
+  font-family: var(--display);
+  font-size: var(--t-l);
+  color: var(--bone);
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+.membership h3 em { display: block; color: var(--copper); font-size: 0.62em; margin-top: 0.4em; }
+.membership .price-line {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  color: var(--bone);
+  margin-top: var(--s-2);
+}
+.membership .price-line em {
+  font-style: italic;
+  color: var(--river-stone);
+  font-size: 0.55em;
+  margin-left: 0.4em;
+}
+
+/* Add-ons — list with rules, no tiles */
+.addons { margin-top: var(--s-4); }
+.addons li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid rgba(160, 90, 44, 0.25);
+  font-size: 1.05rem;
+}
+.addons .ix {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.32em;
+  color: var(--copper);
+}
+.addons .desc { font-family: var(--display); font-style: italic; font-variation-settings: "opsz" 60; color: var(--sage-deep); }
+.addons .price-cell { font-family: var(--display); font-weight: 600; color: var(--charcoal); font-size: 1.2rem; }
+
+/* FAQ — typed list with rules */
+.faq { margin-top: var(--s-4); }
+.faq .q-row {
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid rgba(160, 90, 44, 0.25);
+}
+.faq .q-row:first-child { border-top: 1px solid var(--copper); }
+.faq summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--sage-shadow);
+  gap: var(--s-3);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  font-family: var(--display);
+  color: var(--copper);
+  font-size: 1.6rem;
+  transition: transform 200ms var(--ease-out);
+}
+.faq details[open] summary::after { content: "—"; }
+.faq .a {
+  margin-top: var(--s-2);
+  max-width: 70ch;
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+/* ===========================================================
+   DEEP TISSUE PAGE
+   =========================================================== */
+
+/* Hero: image-bleed-right; text BLEEDS into the image gutter, not adjacent */
+.hero-detail {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--s-3);
+  min-height: 640px;
+  isolation: isolate;
+}
+.hero-detail .image {
+  grid-column: 2;
+  /* REPLACE: hands-on-back deep-tissue photo, warm side-light, sage shadow palette */
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(244,237,226,0.4), transparent 55%),
+    linear-gradient(135deg, var(--charcoal) 0%, var(--copper-deep) 50%, var(--sage-shadow) 100%);
+  position: relative;
+}
+.hero-detail .image::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.85 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  mix-blend-mode: overlay;
+}
+.hero-detail .text {
+  grid-column: 1;
+  padding: var(--s-5) var(--s-3) var(--s-4) var(--s-3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+.hero-detail .modality-id {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: var(--s-2);
+}
+.hero-detail h1 {
+  font-size: var(--t-xl);
+  font-weight: 600;
+  line-height: 1.0;
+  /* the bleed: text overflows past the column edge into the image */
+  width: 132%;
+  background: var(--bone);
+  padding: var(--s-2) var(--s-3) var(--s-2) 0;
+  position: relative;
+  margin-left: -2rem;
+  padding-left: 2rem;
+  border-bottom: 1px solid var(--copper);
+}
+.hero-detail h1 em {
+  display: block;
+  color: var(--copper);
+  font-size: 0.8em;
+}
+.hero-detail .lede {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1.35rem;
+  line-height: 1.4;
+  margin-top: var(--s-3);
+  max-width: 460px;
+}
+
+/* Price rail under the hero — three asymmetric values */
+.price-rail {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr auto;
+  gap: var(--s-4);
+  align-items: end;
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--copper);
+  border-bottom: 1px solid var(--copper);
+  margin-top: var(--s-4);
+}
+.price-rail .pr {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.price-rail .pr .ix {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.price-rail .pr .dur {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1rem;
+}
+.price-rail .pr .pr-amount {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: var(--charcoal);
+  line-height: 1;
+}
+.price-rail .pr.recommended .pr-amount { color: var(--copper); font-size: 3.4rem; }
+.price-rail .pr.recommended .recommend-tag {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--copper);
+  font-size: 0.95rem;
+}
+
+/* What it helps — row with copper rules between, no boxed cards */
+.helps {
+  margin-top: var(--s-4);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.helps .item {
+  padding: var(--s-3) var(--s-3) var(--s-3) var(--s-3);
+  border-left: 1px solid var(--copper);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.helps .item:first-child { border-left: 0; padding-left: 0; }
+.helps .item h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  color: var(--sage-shadow);
+}
+.helps .item h4 em { display: block; color: var(--copper); font-size: 0.6em; margin-top: 0.3em; }
+.helps .item ul li {
+  padding: 0.3rem 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1rem;
+  border-bottom: 1px dotted rgba(160, 90, 44, 0.3);
+}
+.helps .item ul li:last-child { border-bottom: 0; }
+
+/* What to expect — paragraph with marginalia */
+.expect {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--s-4);
+  margin-top: var(--s-5);
+  align-items: start;
+}
+.expect .marginalia {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--copper);
+  text-align: right;
+  padding-top: 1rem;
+  border-top: 1px solid var(--copper);
+}
+.expect .marginalia em {
+  display: block;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--sage-deep);
+  margin-top: var(--s-1);
+}
+.expect .body {
+  font-family: var(--display);
+  font-weight: 400;
+  font-variation-settings: "opsz" 60;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--charcoal);
+  max-width: 56ch;
+}
+.expect .body em { color: var(--copper); }
+
+/* Two-column with copper rule, no boxes */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+  align-items: start;
+}
+.two-col .col {
+  padding: 0 var(--s-3);
+}
+.two-col .col:first-child {
+  border-right: 1px solid var(--copper);
+}
+.two-col h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--sage-shadow);
+  margin-bottom: var(--s-2);
+}
+.two-col h4 em { display: block; color: var(--copper); font-size: 0.55em; margin-top: 0.3em; }
+.two-col p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Explore-other-modalities — photo+caption, NOT cards */
+.explore {
+  margin-top: var(--s-5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+}
+.explore .other {
+  position: relative;
+  min-height: 320px;
+  /* REPLACE: per-modality photo */
+  background: linear-gradient(135deg, var(--sage-deep), var(--bone-deep));
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--s-3);
+  color: var(--bone);
+  text-decoration: none;
+  transition: transform 280ms var(--ease-out);
+}
+.explore .other:hover { transform: translateY(-4px); }
+.explore .other::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.85 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  mix-blend-mode: overlay;
+}
+.explore .caption {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  border-top: 1px solid var(--copper);
+  padding-top: var(--s-2);
+}
+.explore .caption .name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  font-size: 2rem;
+  line-height: 1;
+}
+.explore .caption .name em { display: block; color: var(--bone-deep); font-size: 0.55em; font-style: italic; margin-top: 0.3em; }
+.explore .caption .arrow {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border: 1px solid var(--copper);
+  padding: 0.5rem 0.9rem;
+}
+
+/* ===========================================================
+   RESPONSIVE — collapse rules
+   =========================================================== */
+@media (max-width: 960px) {
+  .ruler { display: none; }
+  .site-header .wrap { grid-template-columns: 1fr; row-gap: var(--s-2); }
+  .site-header .meta { display: none; }
+  .site-nav ul { justify-content: flex-start; flex-wrap: wrap; gap: var(--s-2) var(--s-3); }
+  .hero-home .panel { left: 0; right: 0; bottom: 0; padding: var(--s-3); }
+  .modalities { grid-template-columns: 1fr; }
+  .mod-feature { grid-row: auto; min-height: 320px; }
+  .price-bento { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .price-tile.recommended { grid-column: 1; grid-row: auto; min-height: 320px; }
+  .price-tile.t-60, .price-tile.t-120, .price-tile.flag, .price-tile.note { grid-column: 1; grid-row: auto; }
+  .pkg-row { grid-template-columns: 1fr; gap: var(--s-1); }
+  .pkg-row .pick { justify-self: flex-start; }
+  .membership { grid-template-columns: 1fr; }
+  .closing .wrap { grid-template-columns: 1fr; }
+  .about-teaser { grid-template-columns: 1fr; }
+  .about-teaser .body { border-left: 0; padding-left: 0; border-top: 1px solid var(--copper); padding-top: var(--s-3); }
+  .hero-detail { grid-template-columns: 1fr; }
+  .hero-detail .image { grid-column: 1; min-height: 320px; }
+  .hero-detail .text { grid-column: 1; padding: var(--s-3); }
+  .hero-detail h1 { width: auto; margin-left: 0; padding-left: 0; }
+  .price-rail { grid-template-columns: 1fr; gap: var(--s-2); align-items: start; }
+  .helps { grid-template-columns: 1fr; }
+  .helps .item { border-left: 0; border-top: 1px solid var(--copper); padding-top: var(--s-3); padding-left: 0; }
+  .helps .item:first-child { border-top: 0; padding-top: 0; }
+  .expect { grid-template-columns: 1fr; }
+  .expect .marginalia { text-align: left; }
+  .two-col { grid-template-columns: 1fr; }
+  .two-col .col { border-right: 0; padding: 0; }
+  .two-col .col:first-child { border-right: 0; border-bottom: 1px solid var(--copper); padding-bottom: var(--s-3); }
+  .explore { grid-template-columns: 1fr; }
+  .site-footer .wrap { grid-template-columns: 1fr; }
+  .site-footer .editorial { border-right: 0; padding-right: 0; }
+  .tide-clause { white-space: normal; font-size: 1.1rem; }
+}
+
+/* ===========================================================
+   MEMBER AREA
+   =========================================================== */
+.member-bar {
+  background: var(--charcoal);
+  color: var(--bone);
+  padding: 0.5rem 0;
+  font-family: var(--body);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.member-bar .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-3);
+}
+.member-bar .who { color: var(--copper); }
+.member-bar a { color: rgba(244, 237, 226, 0.78); }
+.member-bar a:hover { color: var(--copper); }
+
+.member-nav {
+  display: flex;
+  gap: var(--s-3);
+  border-bottom: 1px solid var(--copper);
+  padding: var(--s-2) 0;
+  margin-bottom: var(--s-4);
+}
+.member-nav a {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: color 200ms var(--ease-out), border-color 200ms var(--ease-out);
+}
+.member-nav a.is-current { color: var(--copper); border-color: var(--copper); }
+.member-nav a:hover { color: var(--copper); }
+
+.dash-greet {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--copper);
+}
+.dash-greet h1 {
+  font-size: var(--t-xl);
+  font-weight: 600;
+  font-variation-settings: "opsz" 144;
+  line-height: 1.0;
+}
+.dash-greet h1 em { display: block; color: var(--copper); font-size: 0.7em; }
+.dash-greet .meta {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--copper);
+  text-align: right;
+}
+
+/* Dashboard bento — same 1px copper grid trick, asymmetric weights */
+.dash-bento {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1px;
+  background: var(--copper);
+  border: 1px solid var(--copper);
+  margin-top: var(--s-3);
+}
+.dash-tile {
+  background: var(--bone);
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-height: 200px;
+}
+.dash-tile.feature { grid-column: 1; grid-row: 1 / span 2; min-height: 420px; }
+.dash-tile .ix {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.dash-tile h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--sage-shadow);
+  line-height: 1.05;
+}
+.dash-tile h3 em { display: block; color: var(--copper); font-size: 0.6em; margin-top: 0.3em; }
+.dash-tile .big {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 2.6rem;
+  color: var(--sage-shadow);
+  line-height: 1;
+}
+.dash-tile.feature .big { font-size: 4rem; }
+.dash-tile .pull {
+  font-family: var(--display);
+  font-style: italic;
+  font-variation-settings: "opsz" 60;
+  color: var(--sage-deep);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+.dash-tile .cta {
+  margin-top: auto;
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border-bottom: 1px solid var(--copper);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+/* Session-note tile uses warmer background to call attention */
+.dash-tile.note {
+  background: var(--copper-wash);
+}
+.dash-tile.note .pull {
+  font-size: 1.25rem;
+}
+
+/* Time-slot grid for rebook */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--copper);
+  border: 1px solid var(--copper);
+  margin-top: var(--s-3);
+}
+.slot {
+  background: var(--bone);
+  padding: var(--s-2);
+  text-align: center;
+  cursor: pointer;
+  transition: background 180ms var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.slot:hover { background: var(--copper-wash); }
+.slot.is-selected { background: var(--copper); color: var(--bone); }
+.slot.is-selected .day-label { color: var(--bone); }
+.slot.is-disabled { background: var(--bone-grain); color: var(--river-stone); cursor: not-allowed; }
+.slot .day-label {
+  font-family: var(--body);
+  font-size: var(--t-meta);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.slot .time-label {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--sage-shadow);
+}
+.slot.is-selected .time-label { color: var(--bone); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    transition-duration: 0ms !important;
+  }
+}
