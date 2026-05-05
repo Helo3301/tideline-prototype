@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Book a Session — Riverbend Massage Therapy</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* Page-local: the Wix Bookings widget envelope.
@@ -93,12 +94,21 @@
       font-size: 1rem;
       color: var(--charcoal);
       text-align: center;
-      padding: 10px 0;
+      padding: 12px 0;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: 1px solid transparent;
       cursor: pointer;
     }
     .booking-widget .month-grid .day:hover { border-color: var(--copper); }
-    .booking-widget .month-grid .day.is-selected { background: var(--copper); color: var(--bone); }
+    .booking-widget .month-grid .day.is-selected {
+      background: var(--copper);
+      color: var(--bone);
+      font-weight: 700;
+      box-shadow: 0 4px 14px -6px rgba(160, 90, 44, 0.55);
+    }
     .booking-widget .month-grid .day.is-disabled { color: var(--river-stone); cursor: not-allowed; }
     .booking-widget .day-times {
       display: grid;
@@ -205,6 +215,8 @@
           <li><a href="modalities.html">Modalities</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="gift-cards.html">Gifts</a></li>
+          <li><a href="contact.html">Contact</a></li>
           <li><a href="book.html" class="is-current">Book</a></li>
         </ul>
       </nav>
@@ -335,12 +347,12 @@
             <div>
               <p style="font-family: var(--display); font-style: italic; color: var(--sage-deep); margin: 0 0 var(--s-2);">Saturday, May 9 · 6 slots</p>
               <div class="day-times" role="list" aria-label="Available times Saturday May 9">
-                <div class="t" role="listitem" tabindex="0"><span class="label">morning</span><div class="time">09:00</div></div>
-                <div class="t is-selected" role="listitem" tabindex="0" aria-selected="true"><span class="label">morning</span><div class="time">10:30</div></div>
-                <div class="t" role="listitem" tabindex="0"><span class="label">midday</span><div class="time">12:00</div></div>
-                <div class="t" role="listitem" tabindex="0"><span class="label">afternoon</span><div class="time">13:30</div></div>
-                <div class="t" role="listitem" tabindex="0"><span class="label">afternoon</span><div class="time">15:00</div></div>
-                <div class="t" role="listitem" tabindex="0"><span class="label">evening</span><div class="time">16:30</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">morning</span><div class="time">9:00 AM</div></div>
+                <div class="t is-selected" role="listitem" tabindex="0" aria-selected="true"><span class="label">morning</span><div class="time">10:30 AM</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">midday</span><div class="time">12:00 PM</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">afternoon</span><div class="time">1:30 PM</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">afternoon</span><div class="time">3:00 PM</div></div>
+                <div class="t" role="listitem" tabindex="0"><span class="label">evening</span><div class="time">4:30 PM</div></div>
               </div>
             </div>
           </div>
@@ -350,7 +362,7 @@
             <div>
               <span class="velo-marker">Step 04 · Confirm &amp; deposit</span>
               <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.6rem; color: var(--sage-shadow); margin: 4px 0 0;">
-                Sat, May 9 · 10:30
+                Sat, May 9 · 10:30 AM
                 <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">90 min Deep Tissue · in-home (+$30) · $185 total · $55.50 deposit</em>
               </h3>
             </div>
@@ -393,13 +405,27 @@
         </div>
 
         <!-- Returning client -->
-        <div style="background: var(--charcoal); color: var(--bone); padding: var(--s-3); border-left: 4px solid var(--copper);">
+        <div style="background: var(--charcoal); color: var(--bone); padding: var(--s-3); border-left: 4px solid var(--copper); margin-bottom: var(--s-3);">
           <span class="eyebrow" style="color: var(--copper);">Returning?</span>
           <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.4rem; color: var(--bone); margin: var(--s-2) 0;">
             Skip the gate.
             <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">One-tap rebook in the member area.</em>
           </h3>
           <a href="rebook.html" class="cta" style="color: var(--copper); border-color: var(--copper);">Sign in to rebook →</a>
+        </div>
+
+        <!-- The room -->
+        <div style="border: 1px solid var(--copper); padding: var(--s-3);">
+          <span class="eyebrow">§ 42 · The room</span>
+          <h3 style="font-family: var(--display); font-weight: 600; font-size: 1.4rem; color: var(--sage-shadow); margin: var(--s-2) 0;">
+            One table, one therapist.
+            <em style="display: block; color: var(--copper); font-style: italic; font-size: 0.7em; margin-top: 0.3em;">No upsell, no front desk, no waiting on someone else's timer.</em>
+          </h3>
+          <ul style="font-family: var(--display); font-size: 1rem; line-height: 1.55; color: var(--charcoal-soft);">
+            <li style="padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">Quiet</span><br/>Single-room studio. No music if you'd rather have silence.</li>
+            <li style="padding: 4px 0; border-bottom: 1px dotted rgba(160,90,44,0.3);"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">Plain</span><br/>Hypoallergenic linens. Diffuser-free room on request.</li>
+            <li style="padding: 4px 0;"><span style="color: var(--copper); font-style: normal; letter-spacing: 0.22em; font-size: 0.7rem; text-transform: uppercase;">Specific</span><br/>You tell me where the work needs to happen. I do that work.</li>
+          </ul>
         </div>
 
       </div>
@@ -411,7 +437,7 @@
       <div class="editorial">
         <h3>Riverbend<em>Massage Therapy</em></h3>
         <p style="color: rgba(244,237,226,0.7); max-width: 36ch;">Bodywork that meets you where you are. Single-therapist studio in downtown Springfield, Oregon.</p>
-        <div class="stamp">© 2026 Riverbend Massage Therapy LLC · OR LMT #00000XX</div>
+        <div class="stamp">© 2026 Riverbend Massage Therapy LLC · OR LMT #34521</div>
       </div>
       <div>
         <span class="label">Visit</span>
