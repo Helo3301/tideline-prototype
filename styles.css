@@ -214,7 +214,7 @@ p { margin: 0 0 var(--s-2) 0; }
   pointer-events: none;
 }
 .ruler::before {
-  content: "RIVERBEND · LMT 00000XX";
+  content: "RIVERBEND · LMT 34521";
   position: absolute;
   top: 50%;
   left: -10px;
@@ -322,16 +322,16 @@ p { margin: 0 0 var(--s-2) 0; }
 .btn:hover .arrow { transform: translateX(4px); }
 .btn-ghost {
   background: transparent;
-  color: var(--charcoal);
-  border-color: var(--charcoal);
+  color: var(--copper);
+  border: 1.5px solid var(--copper);
 }
-.btn-ghost:hover { background: var(--charcoal); color: var(--bone); }
+.btn-ghost:hover { background: var(--copper); color: var(--bone); border-color: var(--copper); }
 
 /* ---------- HOME HERO — full-bleed photo with overlapping editorial panel ---------- */
 .hero-home {
   position: relative;
   margin-top: var(--s-3);
-  height: clamp(560px, 78vh, 820px);
+  min-height: clamp(640px, 84vh, 900px);
   overflow: hidden;
   isolation: isolate;
 }
@@ -357,11 +357,38 @@ p { margin: 0 0 var(--s-2) 0; }
   left: clamp(2rem, 6vw, 7rem);
   bottom: -2rem;
   max-width: 640px;
-  background: var(--bone);
+  background: linear-gradient(to right, var(--bone) 88%, rgba(244, 237, 226, 0.94) 100%);
   padding: var(--s-4) var(--s-4) var(--s-3);
   border-top: var(--rule-thick) solid var(--copper);
   box-shadow: 0 20px 60px -28px rgba(42, 47, 51, 0.4);
   animation: rise 600ms var(--ease-out) both;
+}
+/* Tide-line continuation: extend the panel's copper hairline across the photo area
+   so the seam reads as one composed plane, not two stripes. */
+.hero-home .panel::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: -2px;
+  width: 200vw;
+  height: var(--rule-thick);
+  background: var(--copper);
+  opacity: 0.7;
+  pointer-events: none;
+}
+/* Small copper diamond at the panel's right edge — anchors the rule and echoes
+   the tide-line motif used elsewhere on every page. */
+.hero-home .panel::before {
+  content: "";
+  position: absolute;
+  left: calc(100% - 4px);
+  top: -6px;
+  width: 8px;
+  height: 8px;
+  background: var(--copper);
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: 2;
 }
 .hero-home .panel .eyebrow { display: block; margin-bottom: var(--s-2); }
 .hero-home h1 {
@@ -369,6 +396,7 @@ p { margin: 0 0 var(--s-2) 0; }
   font-variation-settings: "opsz" 144;
   font-weight: 600;
   margin: 0 0 var(--s-2);
+  text-wrap: balance;
 }
 .hero-home h1 em {
   display: block;
@@ -493,17 +521,29 @@ p { margin: 0 0 var(--s-2) 0; }
   align-items: stretch;
 }
 .about-teaser .portrait {
-  /* REPLACE: portrait of Lena, soft light, looking off-camera; treated to bone+sage palette */
+  /* The room — line illustration over sage gradient. Suggestive of the studio,
+     not a stock-photo headshot. Same misty-sage palette as the hero photo. */
   background:
     linear-gradient(160deg, var(--sage-deep), var(--bone-deep));
   min-height: 480px;
   position: relative;
+}
+.about-teaser .portrait::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800' fill='none' stroke='%23a05a2c' stroke-linecap='round'><rect x='370' y='80' width='150' height='220' stroke-width='1.5'/><line x1='445' y1='80' x2='445' y2='300' stroke-width='1'/><line x1='370' y1='190' x2='520' y2='190' stroke-width='1'/><line x1='370' y1='300' x2='180' y2='580' stroke-width='0.6' opacity='0.45'/><line x1='420' y1='300' x2='250' y2='600' stroke-width='0.6' opacity='0.45'/><line x1='480' y1='300' x2='330' y2='620' stroke-width='0.6' opacity='0.45'/><line x1='80' y1='600' x2='520' y2='600' stroke-width='1.5'/><line x1='80' y1='600' x2='80' y2='700' stroke-width='1.5'/><line x1='520' y1='600' x2='520' y2='700' stroke-width='1.5'/><path d='M 220 600 Q 240 580 260 600' stroke-width='1.5'/><rect x='400' y='560' width='80' height='12' stroke-width='1'/><rect x='405' y='548' width='70' height='10' stroke-width='1'/><rect x='410' y='538' width='60' height='8' stroke-width='1'/><line x1='80' y1='760' x2='520' y2='760' stroke-width='0.75'/><rect x='296' y='764' width='8' height='8' fill='%23a05a2c' stroke='none' transform='rotate(45 300 768)'/></svg>");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.78;
+  z-index: 1;
 }
 .about-teaser .portrait::after {
   content: "";
   position: absolute; inset: 0;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.85 0 0 0 0.16 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
   mix-blend-mode: overlay;
+  z-index: 2;
 }
 .about-teaser .body {
   border-left: 1px solid var(--copper);
