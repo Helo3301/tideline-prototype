@@ -1,4 +1,4 @@
-# Riverbend — From Prototype to Wix Studio Build Plan
+# Tideline — From Prototype to Wix Studio Build Plan
 
 **Date:** 2026-05-02
 **Author:** Sable

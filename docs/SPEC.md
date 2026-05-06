@@ -1,4 +1,4 @@
-# Riverbend Massage Therapy — Wix Studio Site Spec
+# Tideline Bodywork — Wix Studio Site Spec
 
 **Version:** 0.1.0 (draft)
 **Author:** Sable, for Hestia's Creations portfolio
@@ -9,7 +9,7 @@
 
 ## 1. Business Identity
 
-**Riverbend Massage Therapy** — solo licensed massage therapist working out of a single-room studio in downtown Springfield, OR with a limited mobile radius for in-home sessions.
+**Tideline Bodywork** — solo licensed massage therapist working out of a single-room studio in downtown Springfield, OR with a limited mobile radius for in-home sessions.
 
 | Field | Value |
 |---|---|
@@ -308,7 +308,7 @@ These need owner input before WP-1 starts.
 
 This spec deliberately rhymes with McKenzie at the *system* level so the two sites can be presented together:
 
-| Dimension | McKenzie | Riverbend |
+| Dimension | McKenzie | Tideline |
 |---|---|---|
 | Stack | WordPress block theme | Wix Studio + Velo |
 | Driver | Emergency CTA (call now) | Booking + payment |

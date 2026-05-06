@@ -1,8 +1,8 @@
-# Riverbend Massage Therapy — Prototype
+# Tideline Bodywork — Prototype
 
 **Live:** https://helo3301.github.io/riverbend-prototype/
 **Status:** Critique-then-redesign portfolio piece by Hestia's Creations
-**Client:** Fictional. Riverbend is a hypothetical solo-LMT studio in Springfield, Oregon — used to demonstrate Wix Studio + Velo capability against a realistic small-business spec.
+**Client:** Fictional. Tideline is a hypothetical solo-LMT studio in Springfield, Oregon — used to demonstrate Wix Studio + Velo capability against a realistic small-business spec.
 
 ---
 
