@@ -1406,3 +1406,54 @@ p { margin: 0 0 var(--s-2) 0; }
     transition-duration: 0ms !important;
   }
 }
+
+/* =========================================================
+   PORTFOLIO DISCLAIMER RIBBON
+   Sitewide notice that this is a fictional studio. Sage-shadow
+   ground with copper hairline below. Sits above the site header.
+   ========================================================= */
+.disclaimer-ribbon {
+  background: var(--sage-shadow);
+  color: rgba(244, 237, 226, 0.92);
+  font-family: var(--body);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  padding: 0.6rem 0;
+  position: relative;
+  z-index: 50;
+  border-bottom: 1px solid var(--copper);
+}
+.disclaimer-wrap {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 var(--s-3) 0 60px;
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+.disclaimer-label {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--copper);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.disclaimer-body { flex: 1 1 auto; min-width: 0; }
+.disclaimer-body a {
+  color: var(--bone);
+  border-bottom: 1px solid var(--copper);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: color 200ms var(--ease-out);
+}
+.disclaimer-body a:hover { color: var(--copper); }
+@media (max-width: 720px) {
+  .disclaimer-ribbon { font-size: 0.74rem; padding: 0.5rem 0; }
+  .disclaimer-wrap { padding-left: var(--s-3); gap: 0.5rem; }
+  .disclaimer-body a { white-space: normal; }
+}
