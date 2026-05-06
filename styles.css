@@ -1,5 +1,5 @@
 /* =========================================================
-   RIVERBEND — REDESIGN PROTOTYPE
+   TIDELINE — REDESIGN PROTOTYPE
    Direction: editorial bodywork. Sage-on-bone with copper as
    load-bearing structural ink. Fraunces italic as a system.
    The tide line is the signature element on every page.
@@ -214,7 +214,7 @@ p { margin: 0 0 var(--s-2) 0; }
   pointer-events: none;
 }
 .ruler::before {
-  content: "RIVERBEND · LMT 34521";
+  content: "TIDELINE · LMT 34521";
   position: absolute;
   top: 50%;
   left: -10px;

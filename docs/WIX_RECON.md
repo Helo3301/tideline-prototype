@@ -1,4 +1,4 @@
-# Wix Studio Reconnaissance — Riverbend Prototype
+# Wix Studio Reconnaissance — Tideline Prototype
 
 **Date:** 2026-05-02 · **Author:** Sable
 **Companion:** SPEC.md §5, §6, §8
