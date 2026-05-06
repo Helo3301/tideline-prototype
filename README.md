@@ -1,6 +1,8 @@
 # Tideline Bodywork — Prototype
 
-**Live:** https://helo3301.github.io/riverbend-prototype/
+> **Disclaimer.** Tideline Bodywork is a **fictional** solo-LMT studio. Hestia's Creations built this prototype to demonstrate Wix Studio + Velo design capability against a realistic small-business spec — it is not a real business. License numbers, AMTA membership claims, contact details, and booking forms are illustrative only and should not be treated as live.
+
+**Live:** https://helo3301.github.io/tideline-prototype/
 **Status:** Critique-then-redesign portfolio piece by Hestia's Creations
 **Client:** Fictional. Tideline is a hypothetical solo-LMT studio in Springfield, Oregon — used to demonstrate Wix Studio + Velo capability against a realistic small-business spec.
 
@@ -30,7 +32,7 @@ To answer the question *"if I had to ship a Wix Studio site for a real LMT, woul
 
 ## Reading order
 
-1. Visit https://helo3301.github.io/riverbend-prototype/ — the prototype index, with all 15 pages, all 10 AI reference mockups, and the three documents linked.
+1. Visit https://helo3301.github.io/tideline-prototype/ — the prototype index, with all 15 pages, all 10 AI reference mockups, and the three documents linked.
 2. Compare any redesign page against its AI counterpart (e.g. the Pricing page redesign vs `AI·05`).
 3. Read `docs/WIX_RECON.md` for the keep / adapt / drop verdicts on each design move against current Wix Studio capability.
 4. Read `docs/BUILD_PLAN.md` for what changes between the static prototype and the actual Wix build, in order.
